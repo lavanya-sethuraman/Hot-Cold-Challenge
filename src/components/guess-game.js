@@ -30,7 +30,7 @@ export default class Game extends React.Component {
         this.input = e.target.value;
     }
     verifyGuess() {
-        
+
         const userGuess = parseInt(this.input, 10);
         const gameGuess = this.gameGuess;
         const userGuessTens = Math.floor(userGuess / 10);
@@ -40,13 +40,14 @@ export default class Game extends React.Component {
 
         console.log(gameGuess);
 
-        if (!isNaN(userGuess) && userGuess!==0 && userGuess<=100) {
+        if (!isNaN(userGuess) && userGuess !== 0 && userGuess <= 100) {
             if (userGuess === gameGuess) {
                 this.setState({
                     hotCold: 'Bravo! You did it! Play Again!'
                 });
                 this.gameGuess = Math.floor(Math.random() * 100);
                 this.guessedNumbers = [];
+                this.guessCount = 0;
             }
             else {
                 if (userGuessTens === gameGuessTens) {
@@ -67,7 +68,7 @@ export default class Game extends React.Component {
                 }
             }
         }
-        else{
+        else {
             alert("Please enter a number between 1-100. ");
             this.resetGame();
         }
