@@ -9,7 +9,7 @@ import { Container } from 'semantic-ui-react';
 export default class Game extends React.Component {
     constructor(props) {
         super(props);
-        this.gameGuess = Math.floor(Math.random() * 100);
+        this.gameGuess =  this.random(); 
         this.guessCount = 0;
         this.guessedNumbers = [];
         this.state = {
@@ -17,8 +17,12 @@ export default class Game extends React.Component {
         }
     }
 
+    random() {
+        return Math.floor(Math.random() * 100);
+    }
+
     resetGame() {
-        this.gameGuess = Math.floor(Math.random() * 100);
+        this.gameGuess = this.random();
         this.guessCount = 0;
         this.guessedNumbers = [];
         this.setState({
@@ -45,7 +49,7 @@ export default class Game extends React.Component {
                 this.setState({
                     hotCold: 'Bravo! You did it! Play Again!'
                 });
-                this.gameGuess = Math.floor(Math.random() * 100);
+                this.gameGuess = this.random();
                 this.guessedNumbers = [];
                 this.guessCount = 0;
             }
@@ -81,7 +85,7 @@ export default class Game extends React.Component {
                 <Container className="game">
                     <h1>HOT or COLD</h1>
                     <GuessOutput placeholder="Make a Guess" value={this.state.hotCold} />
-                    <GuessInput placeholder="Enter a Number" onChange={this.getUserGuess.bind(this)} />
+                    <GuessInput placeholder="Enter a Number" onChange={(e) => this.getUserGuess(e)} />
                     <GuessButton value="Guess" onClick={this.verifyGuess.bind(this)} />
                     <GuessOutput placeholder="Guess#" value={"Guess#" + this.guessCount} />
                     <GuessOutput placeholder="Guessed num" value={"Guessed" + this.guessedNumbers} />
